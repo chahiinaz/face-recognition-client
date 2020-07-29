@@ -4,6 +4,7 @@ import Navigation from "./components/Navigation/Navigation.js";
 import Logo from "./components/Logo/Logo.js";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm.js";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition.js";
+import Signin from "./components/Signin/Signin.js";
 import Rank from "./components/Rank/Rank.js";
 import "./App.css";
 import Clarifai from "clarifai";
@@ -77,6 +78,7 @@ class App extends Component {
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
         <Navigation />
+        <Signin />
         <Logo />
         <Rank />
         <ImageLinkForm
