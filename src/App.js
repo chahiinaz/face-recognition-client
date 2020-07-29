@@ -5,6 +5,7 @@ import Logo from "./components/Logo/Logo.js";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm.js";
 import Rank from "./components/Rank/Rank.js";
 import "./App.css";
+import Clarifai from "clarifai";
 
 const particlesOptions = {
   particles: {
@@ -17,6 +18,10 @@ const particlesOptions = {
     },
   },
 };
+
+const app = new Clarifai.App({
+  apiKey: "f598057e7c2c48d9baff94447391e11f",
+});
 
 class App extends Component {
   constructor() {
@@ -32,6 +37,17 @@ class App extends Component {
 
   onButtonSubmit = () => {
     console.log("click");
+    app.models
+      .predict(
+        Clarifai.GENERAL_MODEL,
+        "https://samples.clarifai.com/metro-north.jpg"
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   render() {
