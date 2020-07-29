@@ -29,20 +29,20 @@ class App extends Component {
     super();
     this.state = {
       input: "",
+      imageUrl: "",
     };
   }
 
   onInputChange = (event) => {
-    console.log(event.target.value);
+    // console.log("onInputChange Value", event.target.value);
+    this.setState({ input: event.target.value });
   };
 
   onButtonSubmit = () => {
-    console.log("click");
+    this.setState({ imageUrl: this.state.input });
+    // console.log("click");
     app.models
-      .predict(
-        Clarifai.GENERAL_MODEL,
-        "https://samples.clarifai.com/metro-north.jpg"
-      )
+      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then((response) => {
         console.log(response);
       })
@@ -62,7 +62,7 @@ class App extends Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
-        <FaceRecognition />
+        <FaceRecognition imageUrl={this.state.imageUrl} />
       </div>
     );
   }
