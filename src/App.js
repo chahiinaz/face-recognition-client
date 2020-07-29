@@ -3,6 +3,7 @@ import Particles from "react-particles-js";
 import Navigation from "./components/Navigation/Navigation.js";
 import Logo from "./components/Logo/Logo.js";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm.js";
+import FaceRecognition from "./components/FaceRecognition/FaceRecognition.js";
 import Rank from "./components/Rank/Rank.js";
 import "./App.css";
 import Clarifai from "clarifai";
@@ -61,7 +62,7 @@ class App extends Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
-        {/*<FaceRecognition>*/}
+        <FaceRecognition />
       </div>
     );
   }
