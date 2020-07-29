@@ -6,6 +6,7 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm.js";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition.js";
 import Signin from "./components/Signin/Signin.js";
 import Rank from "./components/Rank/Rank.js";
+import Register from "./components/Register/Register.js";
 import "./App.css";
 import Clarifai from "clarifai";
 
@@ -82,10 +83,9 @@ class App extends Component {
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
+
         <Navigation onRouteChange={this.onRouteChange} />
-        {this.state.route === "signin" ? (
-          <Signin onRouteChange={this.onRouteChange} />
-        ) : (
+        {this.state.route === "home" ? (
           <div>
             <Logo />
             <Rank />
@@ -98,6 +98,10 @@ class App extends Component {
               imageUrl={this.state.imageUrl}
             />
           </div>
+        ) : this.state.route === "signin" ? (
+          <Signin onRouteChange={this.onRouteChange} />
+        ) : (
+          <Register onRouteChange={this.onRouteChange} />
         )}
       </div>
     );
