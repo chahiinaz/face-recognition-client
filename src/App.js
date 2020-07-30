@@ -56,7 +56,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:4000").then((response) => response.json());
+    fetch("https://obscure-bayou-75277.herokuapp.com/").then((response) =>
+      response.json()
+    );
     // .then(console.log);
   }
 
@@ -91,7 +93,7 @@ class App extends Component {
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then((response) => {
         if (response) {
-          fetch("http://localhost:4000/image", {
+          fetch("https://obscure-bayou-75277.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
