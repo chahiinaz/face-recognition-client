@@ -56,9 +56,8 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fetch("http://localhost:4000")
-      .then((response) => response.json())
-      .then(console.log);
+    fetch("http://localhost:4000").then((response) => response.json());
+    // .then(console.log);
   }
 
   calculateFaceLocation = (data) => {
@@ -88,15 +87,32 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    // console.log("click");
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then((response) => {
+        if (response) {
+          fetch("http://localhost:4000/image", {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: this.state.user.id,
+            }),
+          })
+            .then((response) => response.json())
+            .then((count) => {
+              // console.log("count", count[0]);
+              this.setState(
+                Object.assign(this.state.user, {
+                  entries: count[0].map((data) => {
+                    return data.entries;
+                  }),
+                })
+              );
+            });
+        }
         this.displayFaceBox(this.calculateFaceLocation(response));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
   onRouteChange = (route) => {
