@@ -20,7 +20,8 @@ class Register extends Component {
   onPasswordChange = (event) => {
     this.setState({ password: event.target.value });
   };
-  onSubmitSignIn = () => {
+
+  onSubmitRegister = () => {
     fetch("http://localhost:4000/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -33,7 +34,8 @@ class Register extends Component {
       .then((response) => response.json())
       .then((user) => {
         if (user) {
-          console.log(user);
+          // console.log("state", this.state);
+          this.props.loadUser(user);
           this.props.onRouteChange("signin");
         }
       });
@@ -89,7 +91,7 @@ class Register extends Component {
               </fieldset>
               <div className="">
                 <input
-                  onClick={this.onSubmitSignIn}
+                  onClick={this.onSubmitRegister}
                   className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                   type="submit"
                   value="Register"

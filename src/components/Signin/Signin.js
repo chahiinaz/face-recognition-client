@@ -27,8 +27,9 @@ class Signin extends Component {
     })
       .then((response) => response.json())
       .then((user) => {
-        console.log(user);
         if (user.jwt) {
+          console.log("state", this.state);
+          this.props.loadUser(user);
           this.props.onRouteChange("home");
         }
       });
