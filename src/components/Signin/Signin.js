@@ -17,7 +17,7 @@ class Signin extends Component {
     this.setState({ signInPassword: event.target.value });
   };
   onSubmitSignIn = () => {
-    fetch("http://localhost:4000/login", {
+    fetch("https://obscure-bayou-75277.herokuapp.com/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -28,7 +28,7 @@ class Signin extends Component {
       .then((response) => response.json())
       .then((user) => {
         if (user.jwt) {
-          console.log("state", this.state);
+          // console.log("state", this.state);
           this.props.loadUser(user);
           this.props.onRouteChange("home");
         }
